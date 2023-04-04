@@ -1,0 +1,38 @@
+### create student
+POST localhost:8080/student/create
+Content-Type: application/json
+
+{
+  "name": "Jumagul",
+  "surname": "Saydaliyeva",
+  "age": 28,
+  "level": "ELEMENTARY",
+  "gender": "FEMALE"
+}
+
+### get student list
+GET localhost:8080/student/list
+
+### get student by id
+GET localhost:8080/student/get/99
+### update student
+PUT localhost:8080/student/update/1
+Content-Type: application/json
+
+{
+  "name": "ELMUROD"
+}
+### delete by id
+DELETE localhost:8080/student/delete/9
+### get by name
+GET localhost:8080/student/getByName/Dilmurod
+### get by surname
+GET localhost:8080/student/getBySurname/Saydaliyev
+### get by level
+GET  localhost:8080/student/getByLevel/BEGINNER
+### get by gender
+GET  localhost:8080/student/getByGender/MALE
+### get by date 2023-03-12
+GET localhost:8080/student/getByDate?fromDate=2023-04-03
+### get by between given date 2023-03-12
+GET localhost:8080/student/getByBetweenGivenDate?fromDate=2023-04-03&toDate=2023-04-05
