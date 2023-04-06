@@ -46,11 +46,12 @@ StudentCourseMark
   13. Studentni eng birinchi olgan baxosi.
   14. Studenti eng berilgan course dan olgan birinchi baxosi.
   15. Studentni berilgan cuorse dan olgan eng baland baxosi.
-  16. Studentni o'rtacha olgan baxolari.
-  17. Studentni berilgan curse dan olgan o'rtacha baxolari.
+
+  16. Studentni o'rtacha olgan baxolari.---
+  17. Studentni berilgan curse dan olgan o'rtacha baxolari.---
   18. Studentni berilgan baxodan katta bo'lgan baxolari soni.
-  19. Berilgan Cursdan eng baland baxo.
-  20. Berilgan Cursdan o'lingan o'rtacha baxo.
+  19. Berilgan Cursdan eng baland baxo.=15
+  20. Berilgan Cursdan o'lingan o'rtacha baxo.---
   21. Berilgan Course dan olingna baxolar soni.
   22. StudentCourseMark pagination.
   23. StudentCourseMark pagination by given studentId. List should be sorted by createdDate.

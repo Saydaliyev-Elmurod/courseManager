@@ -63,4 +63,5 @@ public class CourseController {
                                                    @RequestParam("sPrice") Double sPrice){
         return ResponseEntity.ok(courseService.getByBetweenGivenPrice(fPrice,sPrice));
     }
+
 }
