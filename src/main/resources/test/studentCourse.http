@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "student_id":10,
-  "course_id":3,
+  "course_id":1,
   "mark": 3
 
 }
@@ -15,8 +15,8 @@ Content-Type: application/json
 
 {
   "student_id": 10,
-  "course_id": 3,
-  "mark": 4
+  "course_id": 1,
+  "mark": 5
 }
 
 ### get by id
@@ -49,3 +49,9 @@ GET localhost:8080/student_course/maxMarkCourse?s_id=10&c_id=1
 
 ### get avg mark
 GET localhost:8080/student_course/avgMark?s_id=10
+### get avg course 17
+GET localhost:8080/student_course/avgMarkCourse?s_id=10&c_id=1
+### get mark count mark which great
+GET  localhost:8080/student_course/getGreatCountMark?s_id=10&mark=2
+### get count course mark
+GET localhost:8080/student_course/getCountMarkCourse?s_id=10&c_id=1

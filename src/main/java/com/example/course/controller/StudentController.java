@@ -3,8 +3,10 @@ package com.example.course.controller;
 import com.example.course.dto.StudentDTO;
 import com.example.course.enums.Gender;
 import com.example.course.enums.Level;
+import com.example.course.mapper.StudentFilterRequestDTO;
 import com.example.course.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,29 +54,48 @@ public class StudentController {
     public ResponseEntity<?> getByName(@PathVariable String name) {
         return ResponseEntity.ok(studentService.getByName(name));
     }
+
     @GetMapping("/getBySurname/{surname}")
     public ResponseEntity<?> getBySurname(@PathVariable String surname) {
         return ResponseEntity.ok(studentService.getBySurname(surname));
     }
+
     @GetMapping("/getByAge/{age}")
     public ResponseEntity<?> getByAge(@PathVariable Integer age) {
         return ResponseEntity.ok(studentService.getByAge(age));
     }
+
     @GetMapping("/getByLevel/{level}")
     public ResponseEntity<?> getByAge(@PathVariable Level level) {
         return ResponseEntity.ok(studentService.getByLevel(level));
     }
+
     @GetMapping("/getByGender/{gender}")
     public ResponseEntity<?> getByAge(@PathVariable Gender gender) {
         return ResponseEntity.ok(studentService.getByGender(gender));
     }
+
     @GetMapping("/getByDate")
-    public ResponseEntity<?> getByDate(@RequestParam("fromDate") LocalDate localDate){
+    public ResponseEntity<?> getByDate(@RequestParam("fromDate") LocalDate localDate) {
         return ResponseEntity.ok(studentService.getByDate(localDate));
     }
+
     @GetMapping("/getByBetweenGivenDate")
     public ResponseEntity<?> getByBetweenGivenDate(@RequestParam("fromDate") LocalDate fromDate,
-                                              @RequestParam("toDate") LocalDate toDate){
-        return ResponseEntity.ok(studentService.getByBetweenGivenDate(fromDate,toDate));
+                                                   @RequestParam("toDate") LocalDate toDate) {
+        return ResponseEntity.ok(studentService.getByBetweenGivenDate(fromDate, toDate));
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<?> pagination(@RequestParam("page") Integer page,
+                                        @RequestParam("size") Integer size) {
+        return ResponseEntity.ok(studentService.pagination(page, size));
+    }
+    @PostMapping(value = "/paging-name")
+    public ResponseEntity<Page<StudentDTO>> pagingWithName(@RequestParam(value = "page", defaultValue = "1") int page,
+                                                           @RequestParam(value = "size", defaultValue = "30") int size,
+                                                           @RequestBody StudentFilterRequestDTO filter) {
+        Page<StudentDTO> response = studentService.paginationWithName(filter.getName(), page, size);
+        return ResponseEntity.ok(response);
     }
 }

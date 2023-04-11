@@ -1,10 +1,13 @@
 package com.example.course.service;
 
+import com.example.course.dto.CourseDTO;
 import com.example.course.dto.StudentCourseDTO;
 import com.example.course.entity.CourseEntity;
 import com.example.course.entity.StudentCourseEntity;
 import com.example.course.entity.StudentEntity;
 import com.example.course.exp.NotValidException;
+import com.example.course.mapper.CourseInfoMapper;
+import com.example.course.mapper.StudentMark;
 import com.example.course.repository.CourseRepository;
 import com.example.course.repository.StudentCourseRepository;
 import com.example.course.repository.StudentRepository;
@@ -75,6 +78,20 @@ public class StudentCourseService {
 
     }
 
+    public void test() {
+        List<Object[]> courseObjList = studentCourseRepository.findLastCourseMarkerAsNative(1);
+        if (courseObjList.size() > 0) {
+            Object[] courseObj = courseObjList.get(0);
+
+            CourseDTO courseDTO = new CourseDTO();
+            courseDTO.setId((Integer) courseObj[0]);
+            courseDTO.setName((String) courseObj[1]);
+            System.out.println(courseDTO);
+        }
+
+        System.out.println("dasda");
+    }
+
     public StudentCourseDTO getById(java.lang.Integer id) {
         StudentCourseEntity entity = studentCourseRepository.findById(id).orElse(null);
         if (entity == null) {
@@ -99,6 +116,18 @@ public class StudentCourseService {
             dtoList.add(entityToDto(studentCourseEntity));
         });
         return dtoList;
+    }
+
+    public void test2() {
+        CourseInfoMapper courseInfoMapper = studentCourseRepository.findLastCourseMarkerAsNativeMapping(1);
+        if (courseInfoMapper != null) {
+            CourseDTO courseDTO = new CourseDTO();
+            courseDTO.setId(courseInfoMapper.getCId());
+            courseDTO.setName(courseInfoMapper.getCName());
+            System.out.println(courseDTO + " " + courseInfoMapper.getMark());
+        }
+
+        System.out.println("dasda");
     }
 
     public StudentCourseDTO delete(java.lang.Integer id) {
@@ -156,11 +185,12 @@ public class StudentCourseService {
         return getMarkList(studentCourseRepository.getTop3ByStudentIdOrderByMarkDesc(sId));
     }
 
-    public HashMap<Integer, LocalDateTime> getFirstMarkCourse(java.lang.Integer sId, java.lang.Integer cId) {
-        StudentCourseEntity entity = studentCourseRepository.getTop1ByStudentIdAndCourse_IdOrderByCreatedDateAsc(sId, cId);
-        HashMap<Integer, LocalDateTime> map = new HashMap<>();
-        map.put(entity.getMark(), entity.getCreatedDate());
-        return map;
+    public Object getFirstMarkCourse(java.lang.Integer sId, java.lang.Integer cId) {
+//        StudentCourseEntity entity = studentCourseRepository.getTop1ByStudentIdAndCourse_IdOrderByCreatedDateAsc(sId, cId);
+//        HashMap<Integer, LocalDateTime> map = new HashMap<>();
+//        map.put(entity.getMark(), entity.getCreatedDate());
+//        return map;
+        return studentCourseRepository.getTop1ByStudentIdAndCourse_IdOrderByCreatedDateAsc(sId, cId);
     }
 
     public Object getMaxMarkCourse(java.lang.Integer sId, java.lang.Integer cId) {
@@ -168,9 +198,29 @@ public class StudentCourseService {
         HashMap<Integer, String> map = new HashMap<>();
         map.put(entity.getMark(), entity.getCourse().getName());
         return map;
+//        StudentMark entity = studentCourseRepository.getTop1ByStudentIdAndCourse_IdOrderByMarkDesc(sId, cId);
+//        return entity;
     }
 
     public Double getAvgMark(Integer sId) {
         return studentCourseRepository.findAvgMark(sId);
+    }
+
+    public Integer updateMark(Integer sId, Integer mark) {
+        return studentCourseRepository.updateMark(sId, mark);
+    }
+
+    public Object getAvgMarkCourse(Integer sId, Integer cId) {
+        return studentCourseRepository.getAvgMarkCourse(sId, cId);
+
+    }
+
+    public Object getGreatCountMark(Integer sId, Integer mark) {
+        return studentCourseRepository.getGreatCountMark(sId,mark);
+
+    }
+
+    public Object getCountMarkCourse(Integer sId, Integer c_id) {
+        return studentCourseRepository.getCountMarkCourse(sId,c_id);
     }
 }

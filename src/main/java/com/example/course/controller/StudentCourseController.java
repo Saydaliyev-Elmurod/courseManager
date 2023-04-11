@@ -98,4 +98,19 @@ public class StudentCourseController {
     public ResponseEntity<?> getAvgMark(@RequestParam("s_id") Integer s_id){
         return ResponseEntity.ok(service.getAvgMark(s_id));
     }
+    @GetMapping("/avgMarkCourse")
+    public ResponseEntity<?> getAvgMarkCourse(@RequestParam("s_id") Integer s_id,
+                                              @RequestParam("c_id") Integer c_id){
+        return ResponseEntity.ok(service.getAvgMarkCourse(s_id,c_id));
+    }
+    @GetMapping("/getGreatCountMark")
+    public ResponseEntity<?> getGreatCountMark(@RequestParam("s_id") Integer s_id,
+                                              @RequestParam("mark") Integer mark){
+        return ResponseEntity.ok(service.getGreatCountMark(s_id,mark));
+    }
+    @GetMapping("/getCountMarkCourse")
+    public ResponseEntity<?> getCountMarkCourse(@RequestParam("s_id") Integer s_id,
+                                               @RequestParam("c_id") Integer c_id){
+        return ResponseEntity.ok(service.getCountMarkCourse(s_id,c_id));
+    }
 }

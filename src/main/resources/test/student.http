@@ -14,25 +14,35 @@ Content-Type: application/json
 GET localhost:8080/student/list
 
 ### get student by id
-GET localhost:8080/student/get/99
+GET localhost:8080/student/get/11
 ### update student
-PUT localhost:8080/student/update/1
+PUT localhost:8080/student/update/11
 Content-Type: application/json
 
 {
-  "name": "ELMUROD"
+  "name": "Jumagul"
 }
 ### delete by id
-DELETE localhost:8080/student/delete/9
+DELETE localhost:8080/student/delete/11
 ### get by name
 GET localhost:8080/student/getByName/Dilmurod
 ### get by surname
 GET localhost:8080/student/getBySurname/Saydaliyev
 ### get by level
-GET  localhost:8080/student/getByLevel/BEGINNER
+GET  localhost:8080/student/getByLevel/ELEMENTARY
 ### get by gender
 GET  localhost:8080/student/getByGender/MALE
 ### get by date 2023-03-12
 GET localhost:8080/student/getByDate?fromDate=2023-04-03
 ### get by between given date 2023-03-12
 GET localhost:8080/student/getByBetweenGivenDate?fromDate=2023-04-03&toDate=2023-04-05
+### pagination
+GET localhost:8080/student/pagination?page=1&size=1
+### pagination with
+### Student pagination with name
+POST localhost:8080/student/paging-name?page=1&size=6
+Content-Type:  application/json
+
+{
+  "name": "aaaa"
+}
