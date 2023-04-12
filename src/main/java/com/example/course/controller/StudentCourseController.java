@@ -76,41 +76,69 @@ public class StudentCourseController {
     public ResponseEntity<?> getLastMark(@RequestParam("s_id") Integer s_id) {
         return ResponseEntity.ok(service.lastMark(s_id));
     }
+
     @GetMapping("/firstMark")
     public ResponseEntity<?> getFirstMark(@RequestParam("s_id") Integer s_id) {
         return ResponseEntity.ok(service.firstMark(s_id));
     }
+
     @GetMapping("/top3")
     public ResponseEntity<?> getTop3(@RequestParam("s_id") Integer s_id) {
         return ResponseEntity.ok(service.getTop3(s_id));
     }
+
     @GetMapping("/firstMarkCourse")
     public ResponseEntity<?> getFirstMarkCourse(@RequestParam("s_id") Integer s_id,
-                                                @RequestParam ("c_id") Integer c_id) {
-        return ResponseEntity.ok(service.getFirstMarkCourse(s_id,c_id));
+                                                @RequestParam("c_id") Integer c_id) {
+        return ResponseEntity.ok(service.getFirstMarkCourse(s_id, c_id));
     }
+
     @GetMapping("/maxMarkCourse")
     public ResponseEntity<?> getMaxMarkCourse(@RequestParam("s_id") Integer s_id,
-                                              @RequestParam("c_id") Integer c_id){
-        return ResponseEntity.ok(service.getMaxMarkCourse(s_id,c_id));
+                                              @RequestParam("c_id") Integer c_id) {
+        return ResponseEntity.ok(service.getMaxMarkCourse(s_id, c_id));
     }
+
     @GetMapping("/avgMark")
-    public ResponseEntity<?> getAvgMark(@RequestParam("s_id") Integer s_id){
+    public ResponseEntity<?> getAvgMark(@RequestParam("s_id") Integer s_id) {
         return ResponseEntity.ok(service.getAvgMark(s_id));
     }
+
     @GetMapping("/avgMarkCourse")
     public ResponseEntity<?> getAvgMarkCourse(@RequestParam("s_id") Integer s_id,
-                                              @RequestParam("c_id") Integer c_id){
-        return ResponseEntity.ok(service.getAvgMarkCourse(s_id,c_id));
+                                              @RequestParam("c_id") Integer c_id) {
+        return ResponseEntity.ok(service.getAvgMarkCourse(s_id, c_id));
     }
+
     @GetMapping("/getGreatCountMark")
     public ResponseEntity<?> getGreatCountMark(@RequestParam("s_id") Integer s_id,
-                                              @RequestParam("mark") Integer mark){
-        return ResponseEntity.ok(service.getGreatCountMark(s_id,mark));
+                                               @RequestParam("mark") Integer mark) {
+        return ResponseEntity.ok(service.getGreatCountMark(s_id, mark));
     }
+
     @GetMapping("/getCountMarkCourse")
     public ResponseEntity<?> getCountMarkCourse(@RequestParam("s_id") Integer s_id,
-                                               @RequestParam("c_id") Integer c_id){
-        return ResponseEntity.ok(service.getCountMarkCourse(s_id,c_id));
+                                                @RequestParam("c_id") Integer c_id) {
+        return ResponseEntity.ok(service.getCountMarkCourse(s_id, c_id));
+    }
+
+    @GetMapping("/pagination")
+    public ResponseEntity<?> pagination(@RequestParam("page") Integer page,
+                                        @RequestParam("size") Integer size) {
+        return ResponseEntity.ok(service.pagination(page, size));
+    }
+
+    @GetMapping("/paginationStudent")
+    public ResponseEntity<?> pagination(@RequestParam("s_Id") Integer s_id,
+                                        @RequestParam("page") Integer page,
+                                        @RequestParam("size") Integer size) {
+        return ResponseEntity.ok(service.paginationStudent(s_id, page, size));
+    }
+
+    @GetMapping("/paginationCourse")
+    public ResponseEntity<?> paginationCourse(@RequestParam("c_id") Integer c_id,
+                                              @RequestParam("page") Integer page,
+                                              @RequestParam("size") Integer size) {
+        return ResponseEntity.ok(service.paginationCourse(c_id, page, size));
     }
 }

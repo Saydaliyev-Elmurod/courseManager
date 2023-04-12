@@ -3,10 +3,9 @@ POST localhost:8080/student_course/create
 Content-Type: application/json
 
 {
-  "student_id":10,
-  "course_id":1,
+  "student_id": 10,
+  "course_id": 1,
   "mark": 3
-
 }
 
 ### update studentCourse
@@ -21,23 +20,31 @@ Content-Type: application/json
 
 ### get by id
 GET localhost:8080/student_course/get/10
+
 ### get list
 GET localhost:8080/student_course/list
+
 ### get by id with detail ???
 GET localhost:8080/student_course/getWithDetail/10
+
 ### get student mark day
 GET localhost:8080/student_course/getMark?s_id=10&date=2023-04-06
 
 ### get student mark between days
 GET localhost:8080/student_course/getMarkBetweenDays?s_id=10&f_date=2023-04-05&t_date=2023-04-08
+
 ### get all mark order by created date desc
 GET localhost:8080/student_course/getMarkAll?s_id=10
+
 ### get all mark course order by cr desc
 GET localhost:8080/student_course/getAllMarkCourse?s_id=10&c_id=1
+
 ### get last mark
 GET localhost:8080/student_course/lastMark?s_id=10
+
 ### get first mark
 GET localhost:8080/student_course/firstMark?s_id=10
+
 ### get top 3 mark
 GET localhost:8080/student_course/top3?s_id=10
 
@@ -49,9 +56,24 @@ GET localhost:8080/student_course/maxMarkCourse?s_id=10&c_id=1
 
 ### get avg mark
 GET localhost:8080/student_course/avgMark?s_id=10
+
 ### get avg course 17
 GET localhost:8080/student_course/avgMarkCourse?s_id=10&c_id=1
+
 ### get mark count mark which great
 GET  localhost:8080/student_course/getGreatCountMark?s_id=10&mark=2
+
 ### get count course mark
 GET localhost:8080/student_course/getCountMarkCourse?s_id=10&c_id=1
+
+
+
+### pagination by id
+GET localhost:8080/student_course/pagination?page=1&size=6
+
+### pagination by student_id
+GET localhost:8080/student_course/paginationStudent?s_Id = 1&page=1&size=4
+
+### pagination by course
+GET localhost:8080/student_course/paginationCourse?c_id =1&page=1&size=2
+

@@ -12,6 +12,7 @@ import com.example.course.repository.CourseRepository;
 import com.example.course.repository.StudentCourseRepository;
 import com.example.course.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.error.Mark;
 
@@ -53,7 +54,6 @@ public class StudentCourseService {
         dto.setMark(entity.getMark());
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
-
     }
 
     public StudentCourseEntity update(Integer id, StudentCourseDTO dto) {
@@ -113,6 +113,14 @@ public class StudentCourseService {
     public List<StudentCourseDTO> list() {
         List<StudentCourseDTO> dtoList = new ArrayList<>();
         studentCourseRepository.findAll().forEach(studentCourseEntity -> {
+            dtoList.add(entityToDto(studentCourseEntity));
+        });
+        return dtoList;
+    }
+
+    public List<StudentCourseDTO> list(List<StudentCourseEntity> courseEntityList) {
+        List<StudentCourseDTO> dtoList = new ArrayList<>();
+        courseEntityList.forEach(studentCourseEntity -> {
             dtoList.add(entityToDto(studentCourseEntity));
         });
         return dtoList;
@@ -216,11 +224,32 @@ public class StudentCourseService {
     }
 
     public Object getGreatCountMark(Integer sId, Integer mark) {
-        return studentCourseRepository.getGreatCountMark(sId,mark);
+        return studentCourseRepository.getGreatCountMark(sId, mark);
 
     }
 
     public Object getCountMarkCourse(Integer sId, Integer c_id) {
-        return studentCourseRepository.getCountMarkCourse(sId,c_id);
+        return studentCourseRepository.getCountMarkCourse(sId, c_id);
     }
+
+    public Object pagination(Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(page - 1, size, sort);
+        Page<StudentCourseEntity> entityPage = studentCourseRepository.findAll(pageable);
+        return new PageImpl<>(list(entityPage.getContent()), pageable, entityPage.getTotalElements());
+    }
+
+    public Object paginationStudent(Integer s_id, Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "createdDate");
+        Pageable pageable = PageRequest.of(page-1, size, sort);
+        Page<StudentCourseEntity> entityPage = studentCourseRepository.findAllByStudentId(s_id, pageable);
+        return new PageImpl<>(list(entityPage.getContent()), pageable, entityPage.getTotalElements());
+    }
+    public Object paginationCourse(Integer c_id, Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "createdDate");
+        Pageable pageable = PageRequest.of(page-1, size, sort);
+        Page<StudentCourseEntity> entityPage = studentCourseRepository.findAllByCourseId(c_id, pageable);
+        return new PageImpl<>(list(entityPage.getContent()), pageable, entityPage.getTotalElements());
+    }
+
 }

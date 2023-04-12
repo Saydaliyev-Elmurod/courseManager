@@ -3,6 +3,8 @@ package com.example.course.repository;
 import com.example.course.entity.StudentCourseEntity;
 import com.example.course.mapper.CourseInfoMapper;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -84,6 +86,11 @@ public interface StudentCourseRepository extends PagingAndSortingRepository<Stud
 
     @Query("select count(mark) from StudentCourseEntity  where student.id=:sId and mark>:mark")
     Object getGreatCountMark(@Param("sId") Integer sId, @Param("mark") Integer mark);
+
     @Query("select count(mark) from StudentCourseEntity  where student.id=:sId and course.id=:cId")
-    Object getCountMarkCourse(@Param("sId")Integer sId,@Param("cId") Integer cId);
+    Object getCountMarkCourse(@Param("sId") Integer sId, @Param("cId") Integer cId);
+
+    Page<StudentCourseEntity> findAllByStudentId(Integer sid, Pageable pageable);
+
+    Page<StudentCourseEntity> findAllByCourseId(Integer cId, Pageable pageable);
 }
