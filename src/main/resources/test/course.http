@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name": "Node.Js",
-  "price":400,
+  "price": 400,
   "duration": "12:00"
 }
 
@@ -13,6 +13,7 @@ GET localhost:8080/course/list
 
 ### get course by id
 GET localhost:8080/course/get/2
+
 ### update course
 PUT localhost:8080/course/update/2
 Content-Type: application/json
@@ -22,15 +23,35 @@ Content-Type: application/json
   "price": 230,
   "duration": "12 00"
 }
+
 ### delete by id
 DELETE localhost:8080/course/delete/2
+
 ### get by name
 GET localhost:8080/course/getByName/Java
+
 ### get by price
 GET localhost:8080/course/getByPrice/400
+
 ### get by duration
 GET  localhost:8080/course/getDuration/12:00
+
 ### get by between price
 GET  localhost:8080/course/getByBetweenGivenPrice?fPrice=12&sPrice=3000
+
 ### get by between given date 2023-03-12
 GET localhost:8080/course/getByBetweenGivenDate?fromDate=2023-04-03&toDate=2023-04-05
+
+
+### pagination by id
+GET localhost:8080/course/pagination?page=2&size=2
+
+### pagination by createdDate
+GET localhost:8080/course/paginationCreatedDate?page=1&size=3
+
+### pagination by price
+GET localhost:8080/course/paginationByPrice?price=400&page=1&size=3
+
+
+### pagination by between price
+GET localhost:8080/course/paginationByBetweenPrice?fPrice = 100 & tPrice =200 &page=1&size=3

@@ -7,6 +7,7 @@ import com.example.course.entity.StudentEntity;
 import com.example.course.exp.NotValidException;
 import com.example.course.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -120,5 +121,34 @@ public class CourseService {
         dto.setDuration(entity.getDuration());
         dto.setPrice(entity.getPrice());
         return dto;
+    }
+
+    public Page<CourseDTO> pagination(Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC ,"id");
+        Pageable pageable = PageRequest.of(page-1,size,sort);
+        Page<CourseEntity> entityPage  = courseRepository.findAll(pageable);
+        List<CourseDTO> dtoList = list(entityPage.getContent());
+        return new PageImpl<>(dtoList,pageable,entityPage.getTotalElements());
+    }
+    public Page<CourseDTO> paginationCreatedDate(Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC ,"createdDate");
+        Pageable pageable = PageRequest.of(page-1,size,sort);
+        Page<CourseEntity> entityPage  = courseRepository.findAll(pageable);
+        List<CourseDTO> dtoList = list(entityPage.getContent());
+        return new PageImpl<>(dtoList,pageable,entityPage.getTotalElements());
+    }
+    public Page<CourseDTO> paginationByPrice(Double price,Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC ,"createdDate");
+        Pageable pageable = PageRequest.of(page-1,size,sort);
+        Page<CourseEntity> entityPage  = courseRepository.findAllByPrice(price,pageable);
+        List<CourseDTO> dtoList = list(entityPage.getContent());
+        return new PageImpl<>(dtoList,pageable,entityPage.getTotalElements());
+    }
+    public Page<CourseDTO> paginationByBetweenPrice(Double fromPrice,Double toPrice,Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC ,"createdDate");
+        Pageable pageable = PageRequest.of(page-1,size,sort);
+        Page<CourseEntity> entityPage  = courseRepository.findAllByPriceBetween(fromPrice,toPrice,pageable);
+        List<CourseDTO> dtoList = list(entityPage.getContent());
+        return new PageImpl<>(dtoList,pageable,entityPage.getTotalElements());
     }
 }
