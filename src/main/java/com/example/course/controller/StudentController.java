@@ -91,6 +91,7 @@ public class StudentController {
                                         @RequestParam("size") Integer size) {
         return ResponseEntity.ok(studentService.pagination(page, size));
     }
+
     @PostMapping(value = "/paging-name")
     public ResponseEntity<Page<StudentDTO>> pagingWithName(@RequestParam(value = "page", defaultValue = "1") int page,
                                                            @RequestParam(value = "size", defaultValue = "30") int size,
@@ -98,4 +99,20 @@ public class StudentController {
         Page<StudentDTO> response = studentService.paginationWithName(filter.getName(), page, size);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/pagingByLevel")
+    public ResponseEntity<Page<StudentDTO>> pagingByLevel(@RequestParam("level") Level level,
+                                                          @RequestParam("page") Integer page,
+                                                          @RequestParam("size") Integer size) {
+        Page<StudentDTO> response = studentService.pagingByLevel(level, page, size);
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/pagingByGender")
+    public ResponseEntity<Page<StudentDTO>> pagingByLevel(@RequestParam("gender") Gender gender,
+                                                          @RequestParam("page") Integer page,
+                                                          @RequestParam("size") Integer size) {
+        Page<StudentDTO> response = studentService.pagingByGender(gender, page, size);
+        return ResponseEntity.ok(response);
+    }
+
 }

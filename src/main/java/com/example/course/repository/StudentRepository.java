@@ -42,5 +42,7 @@ public interface StudentRepository extends CrudRepository<StudentEntity, Integer
     List<StudentEntity> getByCreatedDateBetween(LocalDateTime fromDate, LocalDateTime toDate);
 
     Page<StudentEntity> findAllByName(String name, Pageable pageable);
+    Page<StudentEntity> findAllByLevel(Level level,Pageable pageable);
+    Page<StudentEntity> findAllByGender(Gender gender,Pageable pageable);
 
 }

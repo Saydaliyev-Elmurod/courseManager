@@ -143,6 +143,7 @@ public class StudentService {
         List<StudentEntity> entities = studentRepository.getByCreatedDateBetween(fromDate.atStartOfDay(), end);
         return list(entities);
     }
+
     public Page<StudentDTO> paginationWithName(String name, int page, int size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
         Pageable paging = PageRequest.of(page - 1, size, sort);
@@ -181,4 +182,23 @@ public class StudentService {
         return response;
     }
 
+    public Page<StudentDTO> pagingByLevel(Level level, Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(page-1, size, sort);
+        Page<StudentEntity> pageObj = studentRepository.findAllByLevel(level,pageable);
+        List<StudentEntity> studentEntityList = pageObj.getContent();
+        List<StudentDTO> dtoList = list(studentEntityList);
+        Page<StudentDTO> response = new PageImpl<>(dtoList, pageable, pageObj.getTotalElements());
+        return response;
+    }
+
+    public Page<StudentDTO> pagingByGender(Gender gender, Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.ASC,"createdDate");
+        Pageable pageable = PageRequest.of(page-1,size,sort);
+        Page<StudentEntity> pageObj = studentRepository.findAllByGender(gender,pageable);
+        List<StudentEntity> entityList = pageObj.getContent();
+        Long totalElement = pageObj.getTotalElements();
+        List<StudentDTO> dtoList = list(entityList);
+        return new PageImpl<>(dtoList,pageable,totalElement);
+    }
 }

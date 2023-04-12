@@ -36,13 +36,20 @@ GET  localhost:8080/student/getByGender/MALE
 GET localhost:8080/student/getByDate?fromDate=2023-04-03
 ### get by between given date 2023-03-12
 GET localhost:8080/student/getByBetweenGivenDate?fromDate=2023-04-03&toDate=2023-04-05
-### pagination
-GET localhost:8080/student/pagination?page=1&size=1
+### pagination   9
+GET localhost:8080/student/pagination?page=2&size=3
 ### pagination with
 ### Student pagination with name
 POST localhost:8080/student/paging-name?page=1&size=6
 Content-Type:  application/json
 
 {
-  "name": "aaaa"
+  "name": "Elmurod"
 }
+
+### pagination by level
+GET localhost:8080/student/pagingByLevel?level=ELEMENTARY&page=2&size=4
+
+
+### pagination by gender
+GET localhost:8080/student/pagingByGender?gender=MALE&page=2&size=3
